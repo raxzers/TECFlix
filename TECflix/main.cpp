@@ -1,43 +1,76 @@
 #include <iostream>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
+#include <FL/Fl_Widget.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Button.H>
-#include "libray/csv.h"
+#include "objects/movieManager.h"
+#include <curl/curl.h>
 
+movieManager manager;
+Fl_Box *box;
+Fl_Text_Buffer *buff;
+Fl_Text_Display *disp;
+Fl_Window *win;
 void button_cb( Fl_Widget*, void* );
 void make_window()
 
 {
-    Fl_Window *win = new Fl_Window(800, 600,"TECFlix");
+    win = new Fl_Window(800, 600,"TECFlix");
     win->begin();
     Fl_Color c = fl_rgb_color(0,0,12);
     win->color(c);
-    Fl_Button* but = new Fl_Button( 100, 100, 50, 40, "Comenzar" );
+    Fl_Button* but = new Fl_Button( 700, 540, 100, 40, "Comenzar" );
     but -> callback( ( Fl_Callback* ) button_cb );
+/*
+    box = new Fl_Box(10, 10, 780, 580);
+
+    box->box(FL_UP_BOX);
+    box->labelfont(FL_HELVETICA_BOLD_ITALIC);
+    box->labelsize(36);
+    box->labeltype(_FL_SHADOW_LABEL);*/
+    buff = new Fl_Text_Buffer();
+    disp = new Fl_Text_Display(20, 20, 200-40, 150-40, "Display");
+    disp->buffer(buff);
+    disp->hide();
+    win->resizable(*disp);
+    win->show();
+
+
 
     win->show();
 
 };
 void button_cb( Fl_Widget* obj , void* ){
 
-    io::CSVReader<3> in("../csv/movie_metadata.csv");
-    in.read_header(io::ignore_extra_column, "color", "director_name", "movie_title");
-    std::string color,director_name, movie_title;
-    int i=0;
-    while(in.read_row(color, director_name, movie_title )&& i<10){
-        std::cout<< color<< "  "+director_name<< "  "+movie_title<<std::endl;
-        i++;
+    manager.beginPages();
+
+    disp->show();
+
+
+
+
+    //aqui es para obtener la informacion de la pelicula
+    std::map<std::string, std::string> mpeli= manager.getLActual()->getElement(0)->getData().getMovInfo();
+    std::map<std::string, std::string>::iterator itr;
+    std::string infoVent="";
+    for (itr = mpeli.begin(); itr != mpeli.end(); ++itr) {
+        infoVent.append(itr->first+": "+itr->second+"\n");
+
     }
+
+    buff->text(infoVent.c_str());
+
     obj->hide();
     }
 
 int main(int argc, char **argv) {
+
     make_window();
 
 
 
     return Fl::run();
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+
 }

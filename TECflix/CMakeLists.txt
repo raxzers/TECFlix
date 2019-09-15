@@ -11,3 +11,8 @@ target_link_libraries (TECflix ${CMAKE_THREAD_LIBS_INIT})
 FLTK_WRAP_UI(TECflix ui.fl)
 TARGET_LINK_LIBRARIES(TECflix ${FLTK_LIBRARIES})
 TARGET_LINK_LIBRARIES(TECflix ${OPENGL_LIBRARIES})
+set(CURL_LIBRARY "-lcurl")
+find_package(CURL REQUIRED)
+
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(TECflix ${CURL_LIBRARIES})

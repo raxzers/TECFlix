@@ -187,6 +187,20 @@ public:
         }
     }
 
+    void deleteFirst(){
+        Node<T> *temp=first;
+        first=first->getNext();
+        delete temp;
+    }
+
+    void deleteAll(){
+        Node<T> *temp=first;
+        while (temp != nullptr){
+            deleteFirst();
+            temp=first;
+        }
+    }
+
     /// Metodo que verifica si dentro de la lista se encuentra un elemento ingresado
     /// \tparam T Tipo de dato de la lista
     /// \param data Elemento que se esta buscando

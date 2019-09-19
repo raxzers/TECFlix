@@ -5,56 +5,58 @@
 #include "movieManager.h"
 
 movieManager::movieManager() {
-
+    base=0;
+MAXSize=9;
 }
 
-void movieManager::geeneratePages() {
-    lActual = new LinkedList<Movie>();
-    lAnterior = new LinkedList<Movie>();
-    lSiguiente = new LinkedList<Movie>();
+void movieManager::generatePages() {
 
 }
 
 void movieManager::beginPages() {
-    io::CSVReader<17> in("../csv/movie_metadata.csv");
+ io::CSVReader<13> in("../csv/movie_metadata.csv");
     in.read_header(io::ignore_extra_column, "color", "director_name", "movie_title","aspect_ratio","imdb_score","title_year"
-            ,"budget","content_rating","country","movie_imdb_link","plot_keywords",
-                   "genres","gross","actor_1_name","actor_2_name","actor_3_name","duration"
+            ,"content_rating","country","movie_imdb_link","plot_keywords",
+                   "genres","gross","duration"
     );
     std::string color, director_name, movie_title,aspect_ratio,imdb_score,title_year
-    ,budget,content_rating,country,movie_imdb_link,plot_keywords,
-            genres,gross,actor_1_name,actor_2_name,actor_3_name,duration
+    ,content_rating,country,movie_imdb_link,plot_keywords,
+            genres,gross,duration
     ;
     int i=0;
     LinkedList<Movie> l1= LinkedList<Movie>();
     while(in.read_row(color, director_name, movie_title,aspect_ratio,imdb_score,title_year
-            ,budget,content_rating,country,movie_imdb_link,plot_keywords,
-                      genres,gross,actor_1_name,actor_2_name,actor_3_name,duration )&& i<9){
+            ,content_rating,country,movie_imdb_link,plot_keywords,
+                      genres,gross,duration )&& i < base + MAXSize){
+
         Movie h;
         h.setTitulo(movie_title);
         h.setMovInfo("color",color);
-        h.setMovInfo("director_name",director_name);
-        h.setMovInfo("aspect_ratio",aspect_ratio);
-        h.setMovInfo("imdb_score",imdb_score);
-        h.setMovInfo("title_year",title_year);
-        h.setMovInfo("budget",budget);
-        h.setMovInfo("content_rating",content_rating);
-        h.setMovInfo("country",country);
-        h.setMovInfo("movie_imdb_link",movie_imdb_link);
-        h.setMovInfo("plot_keywords",plot_keywords);
-        h.setMovInfo("genres",genres);
-        h.setMovInfo("gross",gross);
-        h.setMovInfo("actor_1_name",actor_1_name);
-        h.setMovInfo("actor_2_name",actor_2_name);
-        h.setMovInfo("actor_3_name",actor_3_name);
-        h.setMovInfo("duration",duration);
+        h.setMovInfo("Director name",director_name);
+        h.setMovInfo("Aspect_ratio",aspect_ratio);
+        h.setMovInfo("IMDB score",imdb_score);
+        h.setMovInfo("Title year",title_year);
+
+        h.setMovInfo("Content_rating",content_rating);
+        h.setMovInfo("Country",country);
+        h.setMovInfo("Movie_imdb_link",movie_imdb_link);
+        h.setMovInfo("Plot_keywords",plot_keywords);
+        h.setMovInfo("Genres",genres);
+        h.setMovInfo("Gross",gross);
+
+        h.setMovInfo("Duration",duration);
 
         //bringIMG(movie_imdb_link,movie_title);
         l1.insertAtEnd(h);
-        //std::cout<< color<< "  "+director_name<< "  "+movie_title<<std::endl;
+        std::cout<< movie_title<<std::endl;
         i++;
+
+
+
     }
     this->lActual=&l1;
+
+    generatePages(base + MAXSize, lSiguiente);
 }
 
 LinkedList<Movie> *movieManager::getLActual() const {
@@ -119,6 +121,76 @@ void movieManager::bringIMG(std::string url, std::string nam) {
 
     fclose(fp);
     curl_easy_cleanup(curl);
+}
+
+void movieManager::nextPage() {
+    if(lAnterior!= nullptr){lAnterior->deleteAll();}
+lAnterior=lActual;
+lActual=lSiguiente;
+std::cout<<"lista siguiente: " <<std::endl;
+generatePages(base + MAXSize, lSiguiente);
+    base+=MAXSize;
+
+}
+
+void movieManager::generatePages(int limit,LinkedList<Movie> *list) {
+    io::CSVReader<13> in("../csv/movie_metadata.csv");
+    in.read_header(io::ignore_extra_column, "color", "director_name", "movie_title","aspect_ratio","imdb_score","title_year"
+            ,"content_rating","country","movie_imdb_link","plot_keywords",
+                   "genres","gross","duration"
+    );
+    std::string color, director_name, movie_title,aspect_ratio,imdb_score,title_year
+    ,content_rating,country,movie_imdb_link,plot_keywords,
+            genres,gross,duration
+    ;
+    int i=0;
+    LinkedList<Movie> l1= LinkedList<Movie>();
+    while(in.read_row(color, director_name, movie_title,aspect_ratio,imdb_score,title_year
+            ,content_rating,country,movie_imdb_link,plot_keywords,
+                      genres,gross,duration )&& i<limit){
+
+
+
+        if(i < base){
+            i++;
+            continue;}
+        else{
+            Movie h;
+            h.setTitulo(movie_title);
+            h.setMovInfo("color",color);
+            h.setMovInfo("Director name",director_name);
+            h.setMovInfo("Aspect_ratio",aspect_ratio);
+            h.setMovInfo("IMDB score",imdb_score);
+            h.setMovInfo("Title year",title_year);
+
+            h.setMovInfo("Content_rating",content_rating);
+            h.setMovInfo("Country",country);
+            h.setMovInfo("Movie_imdb_link",movie_imdb_link);
+            h.setMovInfo("Plot_keywords",plot_keywords);
+            h.setMovInfo("Genres",genres);
+            h.setMovInfo("Gross",gross);
+
+            h.setMovInfo("Duration",duration);
+
+            //bringIMG(movie_imdb_link,movie_title);
+            l1.insertAtEnd(h);
+            std::cout<< movie_title<<std::endl;
+            i++;
+        }
+
+    }
+    list=&l1;
+
+}
+
+void movieManager::backPage() {
+    if(lSiguiente!= nullptr){lSiguiente->deleteAll();}
+    lSiguiente=lActual;
+    lActual=lAnterior;
+    std::cout<<"lista anterior: " <<std::endl;
+    //corregir la actual
+    //generatePages(base-9,lAnterior);
+    base-=MAXSize;
 }
 
 

@@ -22,4 +22,12 @@ void Movie::setTitulo(const std::string &titulo) {
     Movie::titulo = titulo;
 }
 
+const std::string &Movie::getTrailer() const {
+    return trailer;
+}
+
+void Movie::setTrailer(const std::string &trailer) {
+    Movie::trailer = trailer;
+}
+
 

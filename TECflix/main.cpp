@@ -3,22 +3,37 @@
 #include "estructuras/LinkedList.h"
 
 movieManager manager;
-Fl_Box *box2,*box3,*box4,*box5,*box6,*box7,*box8,*box9;
+
 Fl_Text_Buffer *buff;
 Fl_Text_Display *disp;
 Fl_Window *win, *mwin;
 LinkedList<Fl_Box*> lbx= LinkedList<Fl_Box*>();
-Fl_Color c = fl_rgb_color(1,1,12);
+Fl_Color c = fl_rgb_color(4,44,98);
+Fl_Button *nxt;
+
+
+
 void button_cb( Fl_Widget*, void* );
+void box_cb( Fl_Widget* , void*);
 void createBoxes(){
 
+    int x=10,y=10;
     for(int i=0;i<9;i++){
-        auto *box = new Fl_Box(10*i, 10, 158, 300, "peli");
+        std::string numero =std::to_string(i);
+
+        auto *box = new Fl_Box(x, y, 158, 300, "1");
         box->box(FL_UP_BOX);
-        box->show();
+        box->hide();
+
         lbx.insertAtEnd(box);
+        if(i==5){
+            y=310;
+            x=10;
+        }
+        else{x+=158;}
+
     }
-    win->redraw();
+
 
 };
 void make_window(){
@@ -28,7 +43,8 @@ void make_window(){
     win->color(c);
     Fl_Button* but = new Fl_Button( 700, 540, 100, 40, "Comenzar" );
     but -> callback( ( Fl_Callback* ) button_cb );
-
+    nxt=new Fl_Button( 700, 540, 100, 40, "->" );
+    nxt->hide();
     createBoxes();
 
     win->resizable(*disp);
@@ -45,7 +61,7 @@ void newWind(int pos){
     mwin->begin();
     mwin->color(c);
     buff = new Fl_Text_Buffer();
-    disp = new Fl_Text_Display(10, 10, 780, 550, "Display");
+    disp = new Fl_Text_Display(10, 10, 780, 550);
     disp->buffer(buff);
     Movie mact=manager.getLActual()->getElement(pos)->getData();
     mwin->label(mact.getTitulo().c_str());
@@ -53,23 +69,24 @@ void newWind(int pos){
     std::map<std::string, std::string>::iterator itr;
     std::string infoVent="";
     for (itr = mapapeli.begin(); itr != mapapeli.end(); ++itr) {
-        infoVent.append(itr->first+": "+itr->second+"\n");
+        infoVent.append(itr->first+": "+itr->second+"\n"+"\n");
 
     }
+
 
     buff->text(infoVent.c_str());
     mwin->show();
 };
 
 
-void button_cb( Fl_Widget* obj , void* ){
+void button_cb( Fl_Widget* obj , void* data ){
 
     manager.beginPages();
 
-    newWind(2);
+    //manager.nextPage();
+    nxt->show();
 
-    createBoxes();
-
+    win->redraw();
     for(int i=0;i<9;i++){
         lbx.getElement(i)->getData()->show();
     }
@@ -79,6 +96,14 @@ void button_cb( Fl_Widget* obj , void* ){
 
     obj->hide();
     };
+
+
+void box_cb( Fl_Widget* obj , void* data){
+
+    int* pos=(int*) data;
+    newWind(*pos);
+}
+
 
 int main(int argc, char **argv) {
 

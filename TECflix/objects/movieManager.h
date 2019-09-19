@@ -8,12 +8,14 @@
 #include "../estructuras/LinkedList.h"
 #include "Movie.h"
 #include "../libray/csv.h"
+
 #include <curl/curl.h>
 #include <stdio.h>
 
 class movieManager {
 private:
-    LinkedList<Movie> *lActual,*lAnterior,*lSiguiente;
+    LinkedList<Movie> *lActual= nullptr,*lAnterior= nullptr,*lSiguiente= nullptr;
+    int base, MAXSize;
 public:
     LinkedList<Movie> *getLActual() const;
     void bringIMG(std::string url,std::string name);
@@ -22,7 +24,10 @@ public:
 
 public:
     movieManager();
-    void geeneratePages();
+    void generatePages();
+    void generatePages(int limit,LinkedList<Movie> *list);
+    void nextPage();
+    void backPage();
     void beginPages();
 };
 

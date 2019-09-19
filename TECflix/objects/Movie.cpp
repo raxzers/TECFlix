@@ -14,4 +14,12 @@ void Movie::setMovInfo(std::string tag, std::string info) {
 
 }
 
+const std::string &Movie::getTitulo() const {
+    return titulo;
+}
+
+void Movie::setTitulo(const std::string &titulo) {
+    Movie::titulo = titulo;
+}
+
 

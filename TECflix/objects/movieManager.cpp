@@ -31,9 +31,9 @@ void movieManager::beginPages() {
             ,budget,content_rating,country,movie_imdb_link,plot_keywords,
                       genres,gross,actor_1_name,actor_2_name,actor_3_name,duration )&& i<9){
         Movie h;
+        h.setTitulo(movie_title);
         h.setMovInfo("color",color);
         h.setMovInfo("director_name",director_name);
-        h.setMovInfo("movie_title",movie_title);
         h.setMovInfo("aspect_ratio",aspect_ratio);
         h.setMovInfo("imdb_score",imdb_score);
         h.setMovInfo("title_year",title_year);
@@ -49,7 +49,7 @@ void movieManager::beginPages() {
         h.setMovInfo("actor_3_name",actor_3_name);
         h.setMovInfo("duration",duration);
 
-        bringIMG(movie_imdb_link,movie_title);
+        //bringIMG(movie_imdb_link,movie_title);
         l1.insertAtEnd(h);
         //std::cout<< color<< "  "+director_name<< "  "+movie_title<<std::endl;
         i++;

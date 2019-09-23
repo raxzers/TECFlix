@@ -7,11 +7,9 @@
 movieManager::movieManager() {
     base=0;
 MAXSize=9;
+limit=MAXSize;
 }
 
-void movieManager::generatePages() {
-
-}
 
 void movieManager::beginPages() {
  io::CSVReader<13> in("../csv/movie_metadata.csv");
@@ -24,7 +22,8 @@ void movieManager::beginPages() {
             genres,gross,duration
     ;
     int i=0;
-    LinkedList<Movie> l1= LinkedList<Movie>();
+    LinkedList<Movie> *l1= new LinkedList<Movie>();
+
     while(in.read_row(color, director_name, movie_title,aspect_ratio,imdb_score,title_year
             ,content_rating,country,movie_imdb_link,plot_keywords,
                       genres,gross,duration )&& i < base + MAXSize){
@@ -45,18 +44,19 @@ void movieManager::beginPages() {
         h.setMovInfo("Gross",gross);
 
         h.setMovInfo("Duration",duration);
-
+        h.setTrailer(trailerURL(movie_imdb_link));
         //bringIMG(movie_imdb_link,movie_title);
-        l1.insertAtEnd(h);
+        l1->insertAtEnd(h);
         std::cout<< movie_title<<std::endl;
         i++;
 
 
 
     }
-    this->lActual=&l1;
+    this->setLActual(l1);
+    this->setLSiguiente(generatePage(limit+MAXSize,base+MAXSize)) ;
 
-    generatePages(base + MAXSize, lSiguiente);
+
 }
 
 LinkedList<Movie> *movieManager::getLActual() const {
@@ -79,7 +79,7 @@ void movieManager::bringIMG(std::string url, std::string nam) {
     std::string imgurl,imgTag,nombre;
     const char *direct,*name;
     curl = curl_easy_init();
-    std::cout << "descargando imagen" << std::endl;
+
     if(curl) {
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
@@ -127,13 +127,82 @@ void movieManager::nextPage() {
     if(lAnterior!= nullptr){lAnterior->deleteAll();}
 lAnterior=lActual;
 lActual=lSiguiente;
-std::cout<<"lista siguiente: " <<std::endl;
-generatePages(base + MAXSize, lSiguiente);
+lSiguiente= nullptr;
     base+=MAXSize;
+    limit+=MAXSize;
+std::cout<<"lista siguiente: " <<std::endl;
+this->setLSiguiente(generatePage(limit+MAXSize,base+MAXSize));
+//generatePages(base + MAXSize, lSiguiente);
+
 
 }
 
-void movieManager::generatePages(int limit,LinkedList<Movie> *list) {
+
+
+void movieManager::backPage() {
+    if(lSiguiente!= nullptr){lSiguiente->deleteAll();}
+    lSiguiente=lActual;
+    lActual=lAnterior;
+    std::cout<<"lista anterior: " <<std::endl;
+    this->setLAnterior(generatePage(limit-MAXSize,base-MAXSize));
+    //corregir la actual
+    //generatePages(base-9,lAnterior);
+    base-=MAXSize;
+}
+
+std::string movieManager::trailerURL(std::string url) {
+    CURL *curl;
+    CURLcode res;
+    std::string readBuffer;
+    std::string VidURL,vidTag;
+
+    curl = curl_easy_init();
+    //std::cout << "obteniendo trailer" << std::endl;
+    if(curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+        res = curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+
+        //std::cout << readBuffer << std::endl;
+        int posI= readBuffer.find("\"embedUrl\":");
+        int posF= readBuffer.find("\"thumbnail\"");
+        if(posI!=-1){
+            vidTag= readBuffer.substr(posI, posF - posI);
+            posI=vidTag.find("/v");
+            posF=vidTag.find("\",");
+            VidURL="firefox https://www.imdb.com";
+            VidURL.append(vidTag.substr(posI, posF - posI));
+        }
+        else{
+            VidURL="firefox https://www.youtube.com";
+        }
+
+
+
+        //std::cout << VidURL << std::endl;
+    }
+    return VidURL;
+}
+
+LinkedList<Movie> *movieManager::getLAnterior() const {
+    return lAnterior;
+}
+
+void movieManager::setLAnterior(LinkedList<Movie> *lAnterior) {
+    movieManager::lAnterior = lAnterior;
+}
+
+LinkedList<Movie> *movieManager::getLSiguiente() const {
+    return lSiguiente;
+}
+
+void movieManager::setLSiguiente(LinkedList<Movie> *lSiguiente) {
+    movieManager::lSiguiente = lSiguiente;
+}
+
+LinkedList<Movie> *movieManager::generatePage(int limi,int bas) {
     io::CSVReader<13> in("../csv/movie_metadata.csv");
     in.read_header(io::ignore_extra_column, "color", "director_name", "movie_title","aspect_ratio","imdb_score","title_year"
             ,"content_rating","country","movie_imdb_link","plot_keywords",
@@ -144,17 +213,14 @@ void movieManager::generatePages(int limit,LinkedList<Movie> *list) {
             genres,gross,duration
     ;
     int i=0;
-    LinkedList<Movie> l1= LinkedList<Movie>();
+    LinkedList<Movie> *l1= new LinkedList<Movie>();
     while(in.read_row(color, director_name, movie_title,aspect_ratio,imdb_score,title_year
             ,content_rating,country,movie_imdb_link,plot_keywords,
-                      genres,gross,duration )&& i<limit){
+                      genres,gross,duration )&& i<limi){
 
 
 
-        if(i < base){
-            i++;
-            continue;}
-        else{
+        if(i < limi&&i>bas-1){
             Movie h;
             h.setTitulo(movie_title);
             h.setMovInfo("color",color);
@@ -171,26 +237,23 @@ void movieManager::generatePages(int limit,LinkedList<Movie> *list) {
             h.setMovInfo("Gross",gross);
 
             h.setMovInfo("Duration",duration);
-
+            h.setTrailer(trailerURL(movie_imdb_link));
             //bringIMG(movie_imdb_link,movie_title);
-            l1.insertAtEnd(h);
+            l1->insertAtEnd(h);
             std::cout<< movie_title<<std::endl;
             i++;
+            }
+        else{
+            i++;
+            continue;
         }
 
     }
-    list=&l1;
 
+    return l1;
 }
 
-void movieManager::backPage() {
-    if(lSiguiente!= nullptr){lSiguiente->deleteAll();}
-    lSiguiente=lActual;
-    lActual=lAnterior;
-    std::cout<<"lista anterior: " <<std::endl;
-    //corregir la actual
-    //generatePages(base-9,lAnterior);
-    base-=MAXSize;
-}
+
+
 
 

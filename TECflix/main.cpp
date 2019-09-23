@@ -37,7 +37,7 @@ void createBoxes(){
 
 };
 void make_window(){
-    win = new Fl_Window(1366, 768,"TECFlix");
+    win = new Fl_Window(1266, 768,"TECFlix");
     win->begin();
 
     win->color(c);
@@ -68,6 +68,10 @@ void newWind(int pos){
     std::map<std::string, std::string> mapapeli= mact.getMovInfo();
     std::map<std::string, std::string>::iterator itr;
     std::string infoVent="";
+    infoVent.append("trailer: ");
+    infoVent.append(mact.getTrailer());
+    infoVent.append("\n");
+
     for (itr = mapapeli.begin(); itr != mapapeli.end(); ++itr) {
         infoVent.append(itr->first+": "+itr->second+"\n"+"\n");
 
@@ -85,12 +89,12 @@ void button_cb( Fl_Widget* obj , void* data ){
 
     //manager.nextPage();
     nxt->show();
-
+    nxt -> callback( ( Fl_Callback* ) box_cb );
     win->redraw();
     for(int i=0;i<9;i++){
         lbx.getElement(i)->getData()->show();
     }
-
+    newWind(5);
     //aqui es para obtener la informacion de la pelicula
 
 
@@ -100,8 +104,9 @@ void button_cb( Fl_Widget* obj , void* data ){
 
 void box_cb( Fl_Widget* obj , void* data){
 
-    int* pos=(int*) data;
-    newWind(*pos);
+
+
+    manager.nextPage();
 }
 
 

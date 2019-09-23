@@ -194,11 +194,13 @@ public:
     }
 
     void deleteAll(){
-        Node<T> *temp=first;
-        while (temp != nullptr){
-            deleteFirst();
-            temp=first;
+        Node<T> *current=first,*next;
+        while (current != nullptr){
+            next = current->getNext();
+            delete current;
+            current = next;
         }
+        first= nullptr;
     }
 
     /// Metodo que verifica si dentro de la lista se encuentra un elemento ingresado

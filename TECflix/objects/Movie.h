@@ -14,11 +14,11 @@ class Movie {
 
 private:
     std::map<std::string,std::string> movInfo;
-    std::string titulo="",trailer="";
+    std::string titulo="", trailer="";
 public:
-    const std::string &getTrailer() const;
-
     void setTrailer(const std::string &trailer);
+
+    const std::string &getTrailer() const;
 
 public:
     const std::string &getTitulo() const;

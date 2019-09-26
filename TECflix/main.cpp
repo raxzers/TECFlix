@@ -7,16 +7,17 @@ movieManager manager;
 Fl_Text_Buffer *buff;
 Fl_Text_Display *disp;
 Fl_Window *win, *mwin;
-LinkedList<Fl_Box*> lbx= LinkedList<Fl_Box*>();
 Fl_Color c = fl_rgb_color(4,44,98);
 Fl_Button *nxt, *bck;
-int arrPel[9]={0,1,2,3,4,5,6,7,8};
+
 Fl_Group* Pl_group ;
 
-void button_cb( Fl_Widget*, void* );
+void begin_cb(Fl_Widget *obj, void *data);
 void nxt_cb( Fl_Widget* , void*);
 void bck_cb( Fl_Widget* , void*);
 void info_cb( Fl_Widget* obj , void* data);
+void trailer_cb( Fl_Widget* obj , void* data);
+void img2Box();
 void createBoxes(){
     Pl_group->box(FL_UP_BOX);
 
@@ -72,13 +73,13 @@ void createBoxes(){
 
 
 };
-void make_window(){
+void Main_window(){
     win = new Fl_Window(1266, 768,"TECFlix");
     win->begin();
 
     win->color(c);
     Fl_Button* but = new Fl_Button( 700, 540, 100, 40, "Comenzar" );
-    but -> callback( ( Fl_Callback* ) button_cb );
+    but->callback((Fl_Callback *) begin_cb);
     nxt=new Fl_Button( 750, 620, 100, 40, "@->" );
     bck =new Fl_Button( 650, 620, 100, 40, "@<-" );
     bck->hide();
@@ -86,7 +87,7 @@ void make_window(){
     Pl_group=new Fl_Group(10, 10, 800, 600);
     createBoxes();
 
-    win->resizable(*disp);
+
     win->show();
 
 
@@ -95,7 +96,7 @@ void make_window(){
 
 };
 
-void newWind(int pos){
+void movieInfWind(int pos){
     mwin = new Fl_Window(800, 600);
     mwin->begin();
     mwin->color(c);
@@ -107,22 +108,19 @@ void newWind(int pos){
     std::map<std::string, std::string> mapapeli= mact.getMovInfo();
     std::map<std::string, std::string>::iterator itr;
     std::string infoVent="";
-    infoVent.append("trailer: ");
-    infoVent.append(mact.getTrailer());
-    infoVent.append("\n");
-
     for (itr = mapapeli.begin(); itr != mapapeli.end(); ++itr) {
         infoVent.append(itr->first+": "+itr->second+"\n"+"\n");
 
     }
     Fl_Button *button_Trailer = new Fl_Button(700,550,80,40,"Trailer");
-
+      char * url = strdup(mact.getTrailer().c_str()) ;
+    button_Trailer->callback(trailer_cb,url);
     buff->text(infoVent.c_str());
     mwin->show();
 };
 
 
-void button_cb( Fl_Widget* obj , void* data ){
+void begin_cb(Fl_Widget* obj , void* data ){
 
     manager.beginPages();
 
@@ -132,31 +130,47 @@ void button_cb( Fl_Widget* obj , void* data ){
     bck->show();
     bck->callback(( Fl_Callback* )bck_cb);
     Pl_group->show();
-
+    img2Box();
     win->redraw();
     obj->hide();
     };
 
 
 void nxt_cb( Fl_Widget* obj , void* data){
-
-
-
     manager.nextPage();
 }
 void bck_cb( Fl_Widget* obj , void* data){
         manager.backPage();
 }
 void info_cb( Fl_Widget* obj , void* data){
-
     char *num= (char*)data;
-
-    newWind(atoi(num));
+    movieInfWind(atoi(num));
 }
+void trailer_cb( Fl_Widget* obj , void* data){
+    char *url=(char*) data;
+    system(url);
+}
+
+void img2Box(){
+    for(int i=0;i<9;i++){
+        std::string imgAdress="../images/"+manager.getLActual()->getElement(i)->getData().getTitulo()+".jpg";
+        struct stat buffer;
+
+        if(stat (imgAdress.c_str(), &buffer) != 0){
+            imgAdress="../images/"+manager.getLActual()->getElement(i)->getData().getTitulo()+".png";}
+
+        Fl_Shared_Image *img = Fl_Shared_Image::get(imgAdress.c_str());
+
+        Pl_group->child(i)->image(img);
+        Pl_group->child(i)->redraw();
+    }
+
+}
+
 
 int main(int argc, char **argv) {
 
-    make_window();
+    Main_window();
 
 
 

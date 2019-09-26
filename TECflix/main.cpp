@@ -11,13 +11,43 @@ Fl_Color c = fl_rgb_color(4,44,98);
 Fl_Button *nxt, *bck;
 
 Fl_Group* Pl_group ;
-
+/**
+ * @brief metodo que inicializa despeus del llamado del boton para
+ * @param obj objeto de fltk para el callback
+ * @param data puntero que permite pasar parametro
+ * */
 void begin_cb(Fl_Widget *obj, void *data);
+/**
+ * @brief metodo que inicializa despeus del llamado del boton para aceder la pagina siguiente
+ * @param obj objeto de fltk para el callback
+ * @param data puntero que permite pasar parametro
+ * */
 void nxt_cb( Fl_Widget* , void*);
+/**
+ * @brief metodo que inicializa despeus del llamado del boton para aceder la pagina anterior
+ * @param obj objeto de fltk para el callback
+ * @param data puntero que permite pasar parametro
+ * */
 void bck_cb( Fl_Widget* , void*);
+/**
+ * @brief metodo que inicializa despeus del llamado del boton para aceder la info de la pelicula
+ * @param obj objeto de fltk para el callback
+ * @param data puntero que permite pasar parametro
+ * */
 void info_cb( Fl_Widget* obj , void* data);
+/**
+ * @brief metodo que inicializa despeus del llamado del boton para aceder el trailer
+ * @param obj objeto de fltk para el callback
+ * @param data puntero que permite pasar parametro
+ * */
 void trailer_cb( Fl_Widget* obj , void* data);
+/**
+ * @brief metodo para cargar la imagen en la caja de la ventana principal
+ * **/
 void img2Box();
+/**
+ * @brief  metodo para cear las cajas en la ventana principal
+ * **/
 void createBoxes(){
     Pl_group->box(FL_UP_BOX);
 
@@ -73,6 +103,9 @@ void createBoxes(){
 
 
 };
+/**
+ * @brief metodo para cear la ventana principal
+ * **/
 void Main_window(){
     win = new Fl_Window(1266, 768,"TECFlix");
     win->begin();
@@ -95,7 +128,9 @@ void Main_window(){
 
 
 };
-
+/**
+ * @brief metodo para cear la ventana secundaria  con la informacion de la pelicula
+ * **/
 void movieInfWind(int pos){
     mwin = new Fl_Window(800, 600);
     mwin->begin();
@@ -183,9 +218,6 @@ void img2Box(){
 int main(int argc, char **argv) {
 
     Main_window();
-
-
-
     return Fl::run();
 
 }

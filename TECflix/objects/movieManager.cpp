@@ -2,6 +2,7 @@
 // Created by conejo on 10/9/19.
 //
 
+#include <sys/stat.h>
 #include "movieManager.h"
 
 movieManager::movieManager() {
@@ -45,7 +46,13 @@ void movieManager::beginPages() {
 
         h.setMovInfo("Duration",duration);
         h.setTrailer(trailerURL(movie_imdb_link));
-        //bringIMG(movie_imdb_link,movie_title);
+        struct stat buffer;
+        std::string imgAdress="../images/"+movie_title+".jpg";
+
+        if(stat (imgAdress.c_str(), &buffer) != 0){
+            bringIMG(movie_imdb_link,movie_title);
+        }
+
         l1->insertAtEnd(h);
         std::cout<< movie_title<<std::endl;
         i++;
@@ -239,7 +246,12 @@ LinkedList<Movie> *movieManager::generatePage(int limi,int bas) {
 
             h.setMovInfo("Duration",duration);
             h.setTrailer(trailerURL(movie_imdb_link));
-            //bringIMG(movie_imdb_link,movie_title);
+            struct stat buffer;
+            std::string imgAdress="../images/"+movie_title+".jpg";
+
+            if(stat (imgAdress.c_str(), &buffer) != 0){
+                bringIMG(movie_imdb_link,movie_title);
+            }
             l1->insertAtEnd(h);
             std::cout<< movie_title<<std::endl;
             i++;

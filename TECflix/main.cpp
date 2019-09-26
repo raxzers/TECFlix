@@ -21,39 +21,39 @@ void img2Box();
 void createBoxes(){
     Pl_group->box(FL_UP_BOX);
 
-    {auto *box = new Fl_Button(10, 10, 158, 300, "peli1");
+    {auto *box = new Fl_Button(10, 10, 158, 300);
         box->box(FL_UP_FRAME);
 
     }
-    {auto *box1 = new Fl_Button(168, 10, 158, 300, "peli2");
+    {auto *box1 = new Fl_Button(168, 10, 158, 300);
         box1->box(FL_UP_BOX);
 
         }
-    {auto *box = new Fl_Button( 326, 10, 158, 300, "peli3");
+    {auto *box = new Fl_Button( 326, 10, 158, 300);
         box->box(FL_UP_BOX);
 
         }
-    {auto *box = new Fl_Button( 484, 10, 158, 300, "peli4");
+    {auto *box = new Fl_Button( 484, 10, 158, 300);
         box->box(FL_UP_BOX);
 
         }
-    {auto *box = new Fl_Button(642, 10, 158, 300, "peli5");
+    {auto *box = new Fl_Button(642, 10, 158, 300);
         box->box(FL_UP_BOX);
 
        }
-    {auto *box = new Fl_Button(10, 310, 158, 300, "peli6");
+    {auto *box = new Fl_Button(10, 310, 158, 300);
         box->box(FL_UP_BOX);
 
        }
-    {auto *box = new Fl_Button(168, 310, 158, 300, "peli7");
+    {auto *box = new Fl_Button(168, 310, 158, 300);
         box->box(FL_UP_BOX);
 
         }
-    {auto *box = new Fl_Button(326, 310, 158, 300, "peli8");
+    {auto *box = new Fl_Button(326, 310, 158, 300);
         box->box(FL_UP_BOX);
 
        }
-    {auto *box = new Fl_Button(484, 310, 158, 300, "peli9");
+    {auto *box = new Fl_Button(484, 310, 158, 300);
         box->box(FL_UP_BOX);
 
 
@@ -138,9 +138,13 @@ void begin_cb(Fl_Widget* obj , void* data ){
 
 void nxt_cb( Fl_Widget* obj , void* data){
     manager.nextPage();
+    img2Box();
+    win->redraw();
 }
 void bck_cb( Fl_Widget* obj , void* data){
         manager.backPage();
+    img2Box();
+    win->redraw();
 }
 void info_cb( Fl_Widget* obj , void* data){
     char *num= (char*)data;
@@ -155,14 +159,22 @@ void img2Box(){
     for(int i=0;i<9;i++){
         std::string imgAdress="../images/"+manager.getLActual()->getElement(i)->getData().getTitulo()+".jpg";
         struct stat buffer;
-
+        Fl_Image *imgScale;
         if(stat (imgAdress.c_str(), &buffer) != 0){
-            imgAdress="../images/"+manager.getLActual()->getElement(i)->getData().getTitulo()+".png";}
-
-        Fl_Shared_Image *img = Fl_Shared_Image::get(imgAdress.c_str());
-
-        Pl_group->child(i)->image(img);
+            imgAdress="../images/"+manager.getLActual()->getElement(i)->getData().getTitulo()+".png";
+            Fl_PNG_Image *img= new Fl_PNG_Image(imgAdress.c_str());
+            imgScale= img->copy(Pl_group->child(i)->w(),Pl_group->child(i)->h());
+            delete img;
+            Pl_group->child(i)->image(imgScale);
+        }
+        else{
+            Fl_JPEG_Image *img= new Fl_JPEG_Image(imgAdress.c_str());
+            imgScale= img->copy(Pl_group->child(i)->w(),Pl_group->child(i)->h());
+            delete img;
+            Pl_group->child(i)->image(imgScale);
+        }
         Pl_group->child(i)->redraw();
+
     }
 
 }

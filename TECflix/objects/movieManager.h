@@ -8,7 +8,7 @@
 #include "../estructuras/LinkedList.h"
 #include "Movie.h"
 #include "../libray/csv.h"
-
+#include <iostream>
 #include <curl/curl.h>
 #include <stdio.h>
 

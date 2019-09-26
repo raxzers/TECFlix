@@ -54,6 +54,7 @@ void movieManager::beginPages() {
 
     }
     this->setLActual(l1);
+    std::cout<< "lista siguiente:"<<std::endl;
     this->setLSiguiente(generatePage(limit+MAXSize,base+MAXSize)) ;
 
 

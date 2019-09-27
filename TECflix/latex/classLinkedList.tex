@@ -1,0 +1,207 @@
+\hypertarget{classLinkedList}{}\section{Linked\+List$<$ T $>$ Class Template Reference}
+\label{classLinkedList}\index{Linked\+List$<$ T $>$@{Linked\+List$<$ T $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLinkedList_a3c20fcfec867e867f541061a09fc640c}{Linked\+List} ()
+\item 
+\mbox{\Hypertarget{classLinkedList_ab56d59b74c8d24cd223a4a49a2b5cfb1}\label{classLinkedList_ab56d59b74c8d24cd223a4a49a2b5cfb1}} 
+int {\bfseries get\+Size} ()
+\item 
+void \hyperlink{classLinkedList_ab32c4f12170674c0193c94786655a981}{insert\+At\+First} (T data)
+\item 
+void \hyperlink{classLinkedList_a01734ecd86246df5d5c8e9b235b19a05}{insert\+At\+End} (T data)
+\item 
+void \hyperlink{classLinkedList_a7e21e5e9c204d433465d6e886f365e87}{insert\+Element} (T data, int position)
+\item 
+\hyperlink{classNode}{Node}$<$ T $>$ $\ast$ \hyperlink{classLinkedList_a6171fa1f4f2a8256f8e15248bcf43752}{get\+Element} (int position)
+\item 
+\mbox{\Hypertarget{classLinkedList_aefe530c707b35d19ca421610feb56ebb}\label{classLinkedList_aefe530c707b35d19ca421610feb56ebb}} 
+\hyperlink{classNode}{Node}$<$ T $>$ $\ast$ {\bfseries get\+Element2} (T data)
+\item 
+void \hyperlink{classLinkedList_a910adb4391ffdbd8f1b9c62cd8e8f793}{set\+Element} (T element, int position)
+\item 
+void \hyperlink{classLinkedList_ac9ee137c10f202a1cdc2c9da0a685830}{delete\+Element} (int position)
+\item 
+void \hyperlink{classLinkedList_ac19ed825dc7942471971cdb0d652fd31}{delete\+Element2} (T data)
+\item 
+\mbox{\Hypertarget{classLinkedList_afc8c97b11fc314a75d9798233bad8441}\label{classLinkedList_afc8c97b11fc314a75d9798233bad8441}} 
+void {\bfseries delete\+First} ()
+\item 
+\mbox{\Hypertarget{classLinkedList_a8561a6603c5b4c5d178f81a202934cd2}\label{classLinkedList_a8561a6603c5b4c5d178f81a202934cd2}} 
+void {\bfseries delete\+All} ()
+\item 
+bool \hyperlink{classLinkedList_a169be5df3e72b1218f8cfdaf2237ac8f}{contains\+Element} (T data)
+\item 
+\mbox{\Hypertarget{classLinkedList_af360d4c51f63b7756ac555efbfd5d4b6}\label{classLinkedList_af360d4c51f63b7756ac555efbfd5d4b6}} 
+void {\bfseries print\+List} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLinkedList_a3c20fcfec867e867f541061a09fc640c}\label{classLinkedList_a3c20fcfec867e867f541061a09fc640c}} 
+\index{Linked\+List@{Linked\+List}!Linked\+List@{Linked\+List}}
+\index{Linked\+List@{Linked\+List}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{Linked\+List()}{LinkedList()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::\hyperlink{classLinkedList}{Linked\+List} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo de dato de la lista \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classLinkedList_a169be5df3e72b1218f8cfdaf2237ac8f}\label{classLinkedList_a169be5df3e72b1218f8cfdaf2237ac8f}} 
+\index{Linked\+List@{Linked\+List}!contains\+Element@{contains\+Element}}
+\index{contains\+Element@{contains\+Element}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{contains\+Element()}{containsElement()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+bool \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::contains\+Element (\begin{DoxyParamCaption}\item[{T}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo que verifica si dentro de la lista se encuentra un elemento ingresado 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo de dato de la lista \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Elemento que se esta buscando \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True si el elemento esta dentro de la lista, false si no lo esta 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLinkedList_ac9ee137c10f202a1cdc2c9da0a685830}\label{classLinkedList_ac9ee137c10f202a1cdc2c9da0a685830}} 
+\index{Linked\+List@{Linked\+List}!delete\+Element@{delete\+Element}}
+\index{delete\+Element@{delete\+Element}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{delete\+Element()}{deleteElement()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::delete\+Element (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo para eliminar un elemento en una posicion especifica 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo de dato del los elementos de la lista \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Posicion del elemento a eliminar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLinkedList_ac19ed825dc7942471971cdb0d652fd31}\label{classLinkedList_ac19ed825dc7942471971cdb0d652fd31}} 
+\index{Linked\+List@{Linked\+List}!delete\+Element2@{delete\+Element2}}
+\index{delete\+Element2@{delete\+Element2}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{delete\+Element2()}{deleteElement2()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::delete\+Element2 (\begin{DoxyParamCaption}\item[{T}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo para eliminar un elemento de la lista 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo de dato de la lista \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Elemento que se desea eliminar \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLinkedList_a6171fa1f4f2a8256f8e15248bcf43752}\label{classLinkedList_a6171fa1f4f2a8256f8e15248bcf43752}} 
+\index{Linked\+List@{Linked\+List}!get\+Element@{get\+Element}}
+\index{get\+Element@{get\+Element}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{get\+Element()}{getElement()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\hyperlink{classNode}{Node}$<$T$>$$\ast$ \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::get\+Element (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo para obtener el elemento de una posicion especifica 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo de dato del elemento deseado \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Posicion del elemento deseado \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+El elemento deseado 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLinkedList_a01734ecd86246df5d5c8e9b235b19a05}\label{classLinkedList_a01734ecd86246df5d5c8e9b235b19a05}} 
+\index{Linked\+List@{Linked\+List}!insert\+At\+End@{insert\+At\+End}}
+\index{insert\+At\+End@{insert\+At\+End}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{insert\+At\+End()}{insertAtEnd()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::insert\+At\+End (\begin{DoxyParamCaption}\item[{T}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo que inserta un nuevo elemento al final de la lista 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo de dato del elemento \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Dato del nuevo elemento \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLinkedList_ab32c4f12170674c0193c94786655a981}\label{classLinkedList_ab32c4f12170674c0193c94786655a981}} 
+\index{Linked\+List@{Linked\+List}!insert\+At\+First@{insert\+At\+First}}
+\index{insert\+At\+First@{insert\+At\+First}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{insert\+At\+First()}{insertAtFirst()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::insert\+At\+First (\begin{DoxyParamCaption}\item[{T}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo para insertar un nuevo elemento al inicio de la lista. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo del dato que se desea insertar. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Dato que se desea insertar. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLinkedList_a7e21e5e9c204d433465d6e886f365e87}\label{classLinkedList_a7e21e5e9c204d433465d6e886f365e87}} 
+\index{Linked\+List@{Linked\+List}!insert\+Element@{insert\+Element}}
+\index{insert\+Element@{insert\+Element}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{insert\+Element()}{insertElement()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::insert\+Element (\begin{DoxyParamCaption}\item[{T}]{data,  }\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo que inserta un nuevo elemento en una posicion especifica 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo de dato del nuevo elemento \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Dato del nuevo elemento \\
+\hline
+{\em position} & Posicion para el nuevo elemento \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLinkedList_a910adb4391ffdbd8f1b9c62cd8e8f793}\label{classLinkedList_a910adb4391ffdbd8f1b9c62cd8e8f793}} 
+\index{Linked\+List@{Linked\+List}!set\+Element@{set\+Element}}
+\index{set\+Element@{set\+Element}!Linked\+List@{Linked\+List}}
+\subsubsection{\texorpdfstring{set\+Element()}{setElement()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+void \hyperlink{classLinkedList}{Linked\+List}$<$ T $>$\+::set\+Element (\begin{DoxyParamCaption}\item[{T}]{element,  }\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Metodo para establecer el dato que se estaba guardando en una posicion especifica 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Tipo del dato que se desea guardar \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em element} & Elemento que se desea almacenar \\
+\hline
+{\em position} & Posicion en la que se desea almacenar el elemento \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+estructuras/Linked\+List.\+h\end{DoxyCompactItemize}

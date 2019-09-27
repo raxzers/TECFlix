@@ -1,0 +1,197 @@
+\hypertarget{classmovieManager}{}\section{movie\+Manager Class Reference}
+\label{classmovieManager}\index{movie\+Manager@{movie\+Manager}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmovieManager_adc89da5248a92df9f9d8ae06000752c4}\label{classmovieManager_adc89da5248a92df9f9d8ae06000752c4}} 
+int \hyperlink{classmovieManager_adc89da5248a92df9f9d8ae06000752c4}{get\+Page} () const
+\begin{DoxyCompactList}\small\item\em metodo de encapsulacion para de la pagina actual \end{DoxyCompactList}\item 
+void \hyperlink{classmovieManager_aa82aab8426bf729738f8b14321aca9f7}{set\+Page} (int page)
+\begin{DoxyCompactList}\small\item\em metodo de encapsulacion para de la pagina actual \end{DoxyCompactList}\item 
+\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$ \hyperlink{classmovieManager_a3e5c3fa6d602f2f28459c9c7edf723a3}{get\+L\+Anterior} () const
+\begin{DoxyCompactList}\small\item\em metodo de encapsulacion para de la lista actual \end{DoxyCompactList}\item 
+void \hyperlink{classmovieManager_a1f35573336c4c9ae656917ed5deddc2d}{set\+L\+Anterior} (\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$l\+Anterior)
+\begin{DoxyCompactList}\small\item\em metodo de encapsulacion para de la lista anterior \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmovieManager_a5aa49b2a77cf32f217e0e1810270eccc}\label{classmovieManager_a5aa49b2a77cf32f217e0e1810270eccc}} 
+\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$ \hyperlink{classmovieManager_a5aa49b2a77cf32f217e0e1810270eccc}{get\+L\+Siguiente} () const
+\begin{DoxyCompactList}\small\item\em metodo de encapsulacion para de la lista siguiente \end{DoxyCompactList}\item 
+void \hyperlink{classmovieManager_a4999bd13bacc795fc47d7d8e97bfb0bf}{set\+L\+Siguiente} (\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$l\+Siguiente)
+\begin{DoxyCompactList}\small\item\em metodo de encapsulacion para de la lista siguiente \end{DoxyCompactList}\item 
+\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$ \hyperlink{classmovieManager_a44bc51d4c17f68a40ed227fefbafff06}{get\+L\+Actual} () const
+\begin{DoxyCompactList}\small\item\em metodo para obtener la lista actual \end{DoxyCompactList}\item 
+void \hyperlink{classmovieManager_a8cb457bede5df92164c3908b2905caf6}{bring\+I\+MG} (std\+::string url, std\+::string name)
+\begin{DoxyCompactList}\small\item\em trae la imagen de la pagina de I\+M\+DB y las guarda en la carpete de imagenes \end{DoxyCompactList}\item 
+void \hyperlink{classmovieManager_a6a9aaf1eca1abe828713c2b12a00ab44}{set\+L\+Actual} (\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$l\+Actual)
+\begin{DoxyCompactList}\small\item\em metodo de encapsulacion para de la lista actual \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classmovieManager_a3de32f2e1d6167109699012d12e7051a}{trailer\+U\+RL} (std\+::string url)
+\begin{DoxyCompactList}\small\item\em trae el url del trailer de la pagina de I\+M\+DB \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmovieManager_a1e545ec9cea70e6fdab2141492d343c8}\label{classmovieManager_a1e545ec9cea70e6fdab2141492d343c8}} 
+\hyperlink{classmovieManager_a1e545ec9cea70e6fdab2141492d343c8}{movie\+Manager} ()
+\begin{DoxyCompactList}\small\item\em constructo de \hyperlink{classmovieManager}{movie\+Manager} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmovieManager_aa1111fc34f5a18cb534f55bf3dcdf0ac}\label{classmovieManager_aa1111fc34f5a18cb534f55bf3dcdf0ac}} 
+void \hyperlink{classmovieManager_aa1111fc34f5a18cb534f55bf3dcdf0ac}{next\+Page} ()
+\begin{DoxyCompactList}\small\item\em metodo para traer la pagina siguiente \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmovieManager_a4f3757c2b1d012f999fe46341a203ade}\label{classmovieManager_a4f3757c2b1d012f999fe46341a203ade}} 
+void \hyperlink{classmovieManager_a4f3757c2b1d012f999fe46341a203ade}{back\+Page} ()
+\begin{DoxyCompactList}\small\item\em metodo para traer la pagina anterior \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmovieManager_a539ca58a4db59dac258e0b56ed1b7a3a}\label{classmovieManager_a539ca58a4db59dac258e0b56ed1b7a3a}} 
+void \hyperlink{classmovieManager_a539ca58a4db59dac258e0b56ed1b7a3a}{begin\+Pages} ()
+\begin{DoxyCompactList}\small\item\em metodo para traer la pagina siguiente y crear la actualal \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static size\+\_\+t \hyperlink{classmovieManager_a44ea56d8c9842242b54a68e891842e14}{Write\+Callback} (void $\ast$contents, size\+\_\+t size, size\+\_\+t nmemb, void $\ast$userp)
+\begin{DoxyCompactList}\small\item\em metodo auxiliar para la descarga de imagen y trailer \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmovieManager_a8cb457bede5df92164c3908b2905caf6}\label{classmovieManager_a8cb457bede5df92164c3908b2905caf6}} 
+\index{movie\+Manager@{movie\+Manager}!bring\+I\+MG@{bring\+I\+MG}}
+\index{bring\+I\+MG@{bring\+I\+MG}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{bring\+I\+M\+G()}{bringIMG()}}
+{\footnotesize\ttfamily void movie\+Manager\+::bring\+I\+MG (\begin{DoxyParamCaption}\item[{std\+::string}]{url,  }\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+trae la imagen de la pagina de I\+M\+DB y las guarda en la carpete de imagenes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & direccion de pelicula \\
+\hline
+{\em name} & nombre de la pelicula \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovieManager_a44bc51d4c17f68a40ed227fefbafff06}\label{classmovieManager_a44bc51d4c17f68a40ed227fefbafff06}} 
+\index{movie\+Manager@{movie\+Manager}!get\+L\+Actual@{get\+L\+Actual}}
+\index{get\+L\+Actual@{get\+L\+Actual}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{get\+L\+Actual()}{getLActual()}}
+{\footnotesize\ttfamily \hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$ movie\+Manager\+::get\+L\+Actual (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+metodo para obtener la lista actual 
+
+\begin{DoxyReturn}{Returns}
+la lista actual 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmovieManager_a3e5c3fa6d602f2f28459c9c7edf723a3}\label{classmovieManager_a3e5c3fa6d602f2f28459c9c7edf723a3}} 
+\index{movie\+Manager@{movie\+Manager}!get\+L\+Anterior@{get\+L\+Anterior}}
+\index{get\+L\+Anterior@{get\+L\+Anterior}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{get\+L\+Anterior()}{getLAnterior()}}
+{\footnotesize\ttfamily \hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$ movie\+Manager\+::get\+L\+Anterior (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+metodo de encapsulacion para de la lista actual 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l\+Actual} & puntero para la lista \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovieManager_a6a9aaf1eca1abe828713c2b12a00ab44}\label{classmovieManager_a6a9aaf1eca1abe828713c2b12a00ab44}} 
+\index{movie\+Manager@{movie\+Manager}!set\+L\+Actual@{set\+L\+Actual}}
+\index{set\+L\+Actual@{set\+L\+Actual}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{set\+L\+Actual()}{setLActual()}}
+{\footnotesize\ttfamily void movie\+Manager\+::set\+L\+Actual (\begin{DoxyParamCaption}\item[{\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$}]{l\+Actual }\end{DoxyParamCaption})}
+
+
+
+metodo de encapsulacion para de la lista actual 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l\+Actual} & puntero para la lista \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovieManager_a1f35573336c4c9ae656917ed5deddc2d}\label{classmovieManager_a1f35573336c4c9ae656917ed5deddc2d}} 
+\index{movie\+Manager@{movie\+Manager}!set\+L\+Anterior@{set\+L\+Anterior}}
+\index{set\+L\+Anterior@{set\+L\+Anterior}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{set\+L\+Anterior()}{setLAnterior()}}
+{\footnotesize\ttfamily void movie\+Manager\+::set\+L\+Anterior (\begin{DoxyParamCaption}\item[{\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$}]{l\+Anterior }\end{DoxyParamCaption})}
+
+
+
+metodo de encapsulacion para de la lista anterior 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l\+Anterior} & puntero para la lista \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovieManager_a4999bd13bacc795fc47d7d8e97bfb0bf}\label{classmovieManager_a4999bd13bacc795fc47d7d8e97bfb0bf}} 
+\index{movie\+Manager@{movie\+Manager}!set\+L\+Siguiente@{set\+L\+Siguiente}}
+\index{set\+L\+Siguiente@{set\+L\+Siguiente}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{set\+L\+Siguiente()}{setLSiguiente()}}
+{\footnotesize\ttfamily void movie\+Manager\+::set\+L\+Siguiente (\begin{DoxyParamCaption}\item[{\hyperlink{classLinkedList}{Linked\+List}$<$ \hyperlink{classMovie}{Movie} $>$ $\ast$}]{l\+Siguiente }\end{DoxyParamCaption})}
+
+
+
+metodo de encapsulacion para de la lista siguiente 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l\+Siguiente} & puntero para la lista \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovieManager_aa82aab8426bf729738f8b14321aca9f7}\label{classmovieManager_aa82aab8426bf729738f8b14321aca9f7}} 
+\index{movie\+Manager@{movie\+Manager}!set\+Page@{set\+Page}}
+\index{set\+Page@{set\+Page}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{set\+Page()}{setPage()}}
+{\footnotesize\ttfamily void movie\+Manager\+::set\+Page (\begin{DoxyParamCaption}\item[{int}]{page }\end{DoxyParamCaption})}
+
+
+
+metodo de encapsulacion para de la pagina actual 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cambio} & de pagina \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovieManager_a3de32f2e1d6167109699012d12e7051a}\label{classmovieManager_a3de32f2e1d6167109699012d12e7051a}} 
+\index{movie\+Manager@{movie\+Manager}!trailer\+U\+RL@{trailer\+U\+RL}}
+\index{trailer\+U\+RL@{trailer\+U\+RL}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{trailer\+U\+R\+L()}{trailerURL()}}
+{\footnotesize\ttfamily std\+::string movie\+Manager\+::trailer\+U\+RL (\begin{DoxyParamCaption}\item[{std\+::string}]{url }\end{DoxyParamCaption})}
+
+
+
+trae el url del trailer de la pagina de I\+M\+DB 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & direccion de I\+M\+DB \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la direccion del trailer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmovieManager_a44ea56d8c9842242b54a68e891842e14}\label{classmovieManager_a44ea56d8c9842242b54a68e891842e14}} 
+\index{movie\+Manager@{movie\+Manager}!Write\+Callback@{Write\+Callback}}
+\index{Write\+Callback@{Write\+Callback}!movie\+Manager@{movie\+Manager}}
+\subsubsection{\texorpdfstring{Write\+Callback()}{WriteCallback()}}
+{\footnotesize\ttfamily size\+\_\+t movie\+Manager\+::\+Write\+Callback (\begin{DoxyParamCaption}\item[{void $\ast$}]{contents,  }\item[{size\+\_\+t}]{size,  }\item[{size\+\_\+t}]{nmemb,  }\item[{void $\ast$}]{userp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+metodo auxiliar para la descarga de imagen y trailer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contents} & \\
+\hline
+{\em size} & \\
+\hline
+{\em nmemb} & \\
+\hline
+{\em userp} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+objects/movie\+Manager.\+h\item 
+objects/movie\+Manager.\+cpp\end{DoxyCompactItemize}

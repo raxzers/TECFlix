@@ -10,6 +10,7 @@ Fl_Window *win, *mwin;
 Fl_Color c = fl_rgb_color(4,44,98);
 Fl_Button *nxt, *bck;
 Fl_Group* Pl_group ;
+Fl_Widget *scr;
 /**
  * @brief metodo que inicializa despeus del llamado del boton para
  * @param obj objeto de fltk para el callback

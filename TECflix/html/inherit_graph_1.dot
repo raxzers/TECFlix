@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="io::CSVReader\< column\l_count, trim_policy,\l quote_policy, overflow\l_policy, comment_policy \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classio_1_1CSVReader.html"];
+}

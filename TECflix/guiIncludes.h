@@ -14,4 +14,5 @@
 #include <FL/Fl_Shared_Image.H>
 #include <FL/Fl_JPEG_Image.H>
 #include <Fl/Fl_PNG_Image.H>
+#include <Fl/Fl_Scroll.H>
 #endif //TECFLIX_GUIINCLUDES_H

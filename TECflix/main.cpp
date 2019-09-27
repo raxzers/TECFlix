@@ -9,7 +9,6 @@ Fl_Text_Display *disp;
 Fl_Window *win, *mwin;
 Fl_Color c = fl_rgb_color(4,44,98);
 Fl_Button *nxt, *bck;
-
 Fl_Group* Pl_group ;
 /**
  * @brief metodo que inicializa despeus del llamado del boton para
@@ -119,8 +118,9 @@ void Main_window(){
     nxt->hide();
     Pl_group=new Fl_Group(10, 10, 800, 600);
     createBoxes();
-
-
+    nxt -> callback( ( Fl_Callback* ) nxt_cb );
+    bck->callback(( Fl_Callback* )bck_cb);
+    std::cout<< Fl::event_dy() <<std::endl;
     win->show();
 
 
@@ -161,9 +161,15 @@ void begin_cb(Fl_Widget* obj , void* data ){
 
 
     nxt->show();
-    nxt -> callback( ( Fl_Callback* ) nxt_cb );
-    bck->show();
-    bck->callback(( Fl_Callback* )bck_cb);
+
+
+
+
+    if(manager.getPage()==1){
+        bck->hide();
+    }else{bck->show();}
+
+
     Pl_group->show();
     img2Box();
     win->redraw();
@@ -173,11 +179,21 @@ void begin_cb(Fl_Widget* obj , void* data ){
 
 void nxt_cb( Fl_Widget* obj , void* data){
     manager.nextPage();
+
+    if(manager.getPage()==1){
+        bck->hide();
+    }else{bck->show();}
+    //561
+    bck->callback(( Fl_Callback* )bck_cb);
     img2Box();
     win->redraw();
 }
 void bck_cb( Fl_Widget* obj , void* data){
-        manager.backPage();
+    manager.backPage();
+    if(manager.getPage()==1){
+        bck->hide();
+    }else{bck->show();}
+
     img2Box();
     win->redraw();
 }
@@ -213,6 +229,8 @@ void img2Box(){
     }
 
 }
+
+
 
 
 int main(int argc, char **argv) {

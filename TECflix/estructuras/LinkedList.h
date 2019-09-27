@@ -201,6 +201,8 @@ public:
             current = next;
         }
         first= nullptr;
+        size=0;
+
     }
 
     /// Metodo que verifica si dentro de la lista se encuentra un elemento ingresado

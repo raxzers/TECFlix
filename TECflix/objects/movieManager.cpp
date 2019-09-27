@@ -9,6 +9,7 @@ movieManager::movieManager() {
     base=0;
 MAXSize=9;
 limit=MAXSize;
+page=1;
 }
 
 
@@ -132,15 +133,15 @@ void movieManager::bringIMG(std::string url, std::string nam) {
 }
 
 void movieManager::nextPage() {
-    if(lAnterior!= nullptr){lAnterior->deleteAll();}
+    if(lAnterior!= nullptr){lAnterior->deleteAll();lAnterior= nullptr;}
 lAnterior=lActual;
 lActual=lSiguiente;
 lSiguiente= nullptr;
     base+=MAXSize;
     limit+=MAXSize;
-std::cout<<"lista siguiente: " <<std::endl;
+std::cout<<"=============================lista siguiente:======================== " <<std::endl;
 this->setLSiguiente(generatePage(limit+MAXSize,base+MAXSize));
-//generatePages(base + MAXSize, lSiguiente);
+page++;
 
 
 }
@@ -148,14 +149,16 @@ this->setLSiguiente(generatePage(limit+MAXSize,base+MAXSize));
 
 
 void movieManager::backPage() {
-    if(lSiguiente!= nullptr){lSiguiente->deleteAll();}
+    if(lSiguiente!= nullptr){lSiguiente->deleteAll(); lSiguiente= nullptr;}
     lSiguiente=lActual;
     lActual=lAnterior;
-    std::cout<<"lista anterior: " <<std::endl;
-    this->setLAnterior(generatePage(limit-MAXSize,base-MAXSize));
-    //corregir la actual
-    //generatePages(base-9,lAnterior);
+    lAnterior= nullptr;
     base-=MAXSize;
+    limit-=MAXSize;
+    std::cout<<"====================lista anterior:=========================== " <<std::endl;
+    this->setLAnterior(generatePage(limit-MAXSize,base-MAXSize));
+    page--;
+
 }
 
 std::string movieManager::trailerURL(std::string url) {
@@ -264,6 +267,14 @@ LinkedList<Movie> *movieManager::generatePage(int limi,int bas) {
     }
 
     return l1;
+}
+
+int movieManager::getPage() const {
+    return page;
+}
+
+void movieManager::setPage(int page) {
+    movieManager::page = page;
 }
 
 

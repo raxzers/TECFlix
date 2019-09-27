@@ -44,9 +44,21 @@ private:
     * @brief limite superior de la paginas
     **/
     int limit;
-
-
+    /**
+    * @brief pagina actual
+    **/
+    int page;
 public:
+    /**
+    * @brief metodo de encapsulacion para de la pagina actual
+    **/
+    int getPage() const;
+    /**
+    * @brief metodo de encapsulacion para de la pagina actual
+    * @param cambio de pagina
+    **/
+    void setPage(int page);
+
     /**
     * @brief metodo de encapsulacion para de la lista actual
     * @param lActual puntero para la lista

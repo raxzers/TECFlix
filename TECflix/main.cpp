@@ -10,7 +10,7 @@ Fl_Window *win, *mwin;
 Fl_Color c = fl_rgb_color(4,44,98);
 Fl_Button *nxt, *bck;
 Fl_Group* Pl_group ;
-Fl_Widget *scr;
+Fl_Box *logo;
 /**
  * @brief metodo que inicializa despeus del llamado del boton para
  * @param obj objeto de fltk para el callback
@@ -49,8 +49,7 @@ void img2Box();
  * @brief  metodo para cear las cajas en la ventana principal
  * **/
 void createBoxes(){
-    Pl_group->box(FL_UP_BOX);
-
+    Pl_group->box(FL_NO_BOX);
     {auto *box = new Fl_Button(10, 10, 158, 300);
         box->box(FL_UP_FRAME);
 
@@ -107,17 +106,20 @@ void createBoxes(){
  * @brief metodo para cear la ventana principal
  * **/
 void Main_window(){
-    win = new Fl_Window(1266, 768,"TECFlix");
+    win = new Fl_Window(1266, 700,"TECFlix");
     win->begin();
 
     win->color(c);
-    Fl_Button* but = new Fl_Button( 700, 540, 100, 40, "Comenzar" );
+    logo= new Fl_Box(350, 150, 600, 315);
+    Fl_PNG_Image *img= new Fl_PNG_Image("../tecflix.png");
+    logo->image(img);
+    Fl_Button* but = new Fl_Button( 583, 400, 100, 40, "Comenzar" );
     but->callback((Fl_Callback *) begin_cb);
     nxt=new Fl_Button( 750, 620, 100, 40, "@->" );
     bck =new Fl_Button( 650, 620, 100, 40, "@<-" );
     bck->hide();
     nxt->hide();
-    Pl_group=new Fl_Group(10, 10, 800, 600);
+    Pl_group=new Fl_Group(100, 10, 800, 600);
     createBoxes();
     nxt -> callback( ( Fl_Callback* ) nxt_cb );
     bck->callback(( Fl_Callback* )bck_cb);
@@ -159,7 +161,7 @@ void movieInfWind(int pos){
 void begin_cb(Fl_Widget* obj , void* data ){
 
     manager.beginPages();
-
+    logo->hide();
 
     nxt->show();
 
@@ -231,9 +233,15 @@ void img2Box(){
 
 }
 
-
-
-
+int handle(int event){
+    int scro=Fl::event_dy();
+    switch (event){
+        case  FL_MOUSEWHEEL:
+            if (Fl::event_dy()<0){manager.backPage();}
+            else{manager.nextPage();}
+            break;
+    }
+}
 int main(int argc, char **argv) {
 
     Main_window();

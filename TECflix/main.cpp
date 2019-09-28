@@ -186,7 +186,7 @@ void nxt_cb( Fl_Widget* obj , void* data){
     if(manager.getPage()==1){
         bck->hide();
     }else{bck->show();}
-    //561
+
     bck->callback(( Fl_Callback* )bck_cb);
     img2Box();
     win->redraw();
